@@ -398,7 +398,8 @@ export default function OrderForm({ setOrderData }) {
       <table>
         <thead>
           <tr>
-            <th>Pick</th>
+            {/* <th>Pick</th> */}
+            <th>S.no</th>
             <th>Product</th>
             <th>Unit Price (Rs)</th>
             <th>Quantity</th>
@@ -416,13 +417,14 @@ export default function OrderForm({ setOrderData }) {
                   </tr>
                 )}
                 <tr>
-                  <td>
+                  <td>{idx+1}</td>
+                  {/* <td>
                     <input
                       type="checkbox"
                       checked={picked[p.id] !== false}
                       onChange={(e) => handlePickChange(p.id, e.target.checked)}
                     />
-                  </td>
+                  </td> */}
                   <td>{p.name}</td>
                   <td>₹ {p.price}</td>
                   <td>
