@@ -1,0 +1,286 @@
+/* Simple Colors */
+:root {
+  --text-dark: #333333;
+  --text-medium: #666666;
+  --text-light: #999999;
+  --border-light: #e0e0e0;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--white);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--white);
+  padding: 20px;
+  border: 1px solid var(--border-light);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 5px;
+  color: #e74c3c;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.muted {
+  color: var(--text-medium);
+  font-size: 13px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+}
+
+thead {
+  background: var(--light-gray);
+  color: var(--text-dark);
+}
+
+th {
+  padding: 10px 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+}
+
+td {
+  padding: 8px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+/* Category Row Styling */
+.category-row {
+  background: #3498db;
+  color: var(--white);
+  font-weight: bold;
+}
+
+.category-row td {
+  padding: 10px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* Product Row Styling */
+tbody tr:not(.category-row):nth-child(even) {
+  background: var(--white);
+}
+
+tbody tr:not(.category-row):hover {
+  background: var(--light-gray);
+}
+
+/* Input Styling */
+input[type="number"] {
+  width: 60px;
+  padding: 4px;
+  border: 1px solid var(--border-light);
+  text-align: center;
+  font-size: 0.9rem;
+  background: var(--white);
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Totals Section */
+.totals {
+  margin-top: 20px;
+  background: var(--white);
+  color: var(--text-dark);
+  padding: 0;
+  text-align: right;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+  padding: 2px 0;
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+.row:last-child {
+  border-top: 1px solid var(--border-light);
+  padding-top: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.small {
+  font-size: 0.9rem;
+}
+
+/* Form Styling */
+h3 {
+  color: var(--text-dark);
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px 0;
+  color: var(--text-dark);
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+input[type="text"],
+input:not([type]),
+textarea {
+  width: 100% !important;
+  padding: 8px;
+  margin-top: 2px;
+  border: 1px solid var(--border-light);
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  background: var(--white);
+}
+
+input[type="text"]:focus,
+input:not([type]):focus,
+textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Button Styling */
+button {
+  background: #3498db;
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: normal;
+  border-radius: 3px;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+/* Share Info Styling */
+.share-info {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff3cd;
+  color: var(--text-dark);
+  border: 1px solid #ffeaa7;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.note {
+  margin-top: 8px;
+  color: #e74c3c;
+  font-weight: bold;
+  background: var(--white);
+  padding: 8px;
+  border: 1px solid var(--border-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+
+  th,
+  td {
+    padding: 6px 4px;
+  }
+
+  input[type="number"] {
+    width: 50px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  table {
+    font-size: 0.75rem;
+  }
+
+  th,
+  td {
+    padding: 4px 2px;
+  }
+
+  input[type="number"] {
+    width: 40px;
+  }
+}
