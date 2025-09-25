@@ -6,8 +6,6 @@ import "./styles.css";
 export default function App() {
   const [orderData, setOrderData] = useState(null);
 
-  console.log(orderData)
-
   return (
     <div className="container">
       <h1>Sri Maruthi Pyro Park</h1>
@@ -20,7 +18,7 @@ export default function App() {
         Choose quantities for the products you want to order. The product prices
         are pre-filled.
       </p>
-      <strong> Discount: 45%</strong>
+      <strong> Discount: 45% (excludes Matches & Caps, Gift Boxes)</strong>
       <br />
       <strong>Minimum purchase value: ₹ 3000</strong>
 

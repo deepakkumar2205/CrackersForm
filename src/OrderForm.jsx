@@ -200,7 +200,6 @@ const DISCOUNT_PERCENT = 45;
 
 export default function OrderForm({ setOrderData }) {
   const [quantities, setQuantities] = useState({});
-  const [picked, setPicked] = useState({});
   const [customer, setCustomer] = useState({
     name: "",
     phone: "",
@@ -214,22 +213,27 @@ export default function OrderForm({ setOrderData }) {
     }));
   };
 
-  const handlePickChange = (id, value) => {
-    setPicked((prev) => ({ ...prev, [id]: value }));
-  };
-
   const handleCustomerChange = (field, value) => {
     setCustomer((prev) => ({ ...prev, [field]: value }));
   };
 
   const calcTotals = () => {
     let subtotal = 0;
+    let discountableAmount = 0;
+    const excludedCategories = ["Matches & Caps", "Gift Boxes"];
+
     PRODUCTS.forEach((p) => {
       const q = quantities[p.id] || 0;
-      const isPicked = picked[p.id] !== false;
-      subtotal += isPicked ? p.price * q : 0;
+      const lineTotal = p.price * q;
+      subtotal += lineTotal;
+
+      // Only add to discountable amount if category is not excluded
+      if (!excludedCategories.includes(p.cat)) {
+        discountableAmount += lineTotal;
+      }
     });
-    const discount = +(subtotal * (DISCOUNT_PERCENT / 100));
+
+    const discount = +(discountableAmount * (DISCOUNT_PERCENT / 100));
     const total = +(subtotal - discount); // Remove + SHIPPING
     return {
       subtotal: Math.round(subtotal),
@@ -333,7 +337,7 @@ export default function OrderForm({ setOrderData }) {
     );
     y += 14;
     doc.text(
-      `Discount (${DISCOUNT_PERCENT}%): Rs ${Math.round(
+      `Discount (${DISCOUNT_PERCENT}% - excludes Matches & Caps, Gift Boxes): Rs ${Math.round(
         order.totals.discount
       ).toLocaleString("en-IN")}`,
       left,
@@ -379,8 +383,8 @@ export default function OrderForm({ setOrderData }) {
       name: p.name,
       price: p.price,
       qty: quantities[p.id] || 0,
-      picked: picked[p.id] !== false,
-      cat: p.cat
+      picked: true,
+      cat: p.cat,
     }));
 
     const order = { customer, items, totals };
@@ -392,6 +396,16 @@ export default function OrderForm({ setOrderData }) {
       `SkyFire_order_${customer.name.replace(/\s+/g, "_")}_${timestamp}.pdf`
     );
   };
+
+  function customCategoryTitle(cat) {
+    if (cat === "Matches & Caps") {
+      return "Matches & Caps (Net Price)";
+    }
+    if (cat === "Gift Boxes") {
+      return "Gift Boxes (Net Price)";
+    }
+    return cat;
+  }
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
@@ -409,15 +423,16 @@ export default function OrderForm({ setOrderData }) {
         <tbody>
           {PRODUCTS.map((p, idx) => {
             const lastCat = idx === 0 || PRODUCTS[idx - 1].cat !== p.cat;
+
             return (
               <React.Fragment key={p.id}>
                 {lastCat && (
                   <tr className="category-row">
-                    <td colSpan="5">{p.cat}</td>
+                    <td colSpan="5">{customCategoryTitle(p.cat)}</td>
                   </tr>
                 )}
                 <tr>
-                  <td>{idx+1}</td>
+                  <td>{idx + 1}</td>
                   {/* <td>
                     <input
                       type="checkbox"
@@ -448,7 +463,9 @@ export default function OrderForm({ setOrderData }) {
           <div>₹ {calcTotals().subtotal.toLocaleString("en-IN")}</div>
         </div>
         <div className="row" style={{ justifyContent: "space-between" }}>
-          <div className="small">Discount (45%)</div>
+          <div className="small">
+            Discount (45% - excludes Matches & Caps, Gift Boxes)
+          </div>
           <div>₹ {calcTotals().discount.toLocaleString("en-IN")}</div>
         </div>
         <div className="row" style={{ justifyContent: "space-between" }}>
